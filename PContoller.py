@@ -24,20 +24,20 @@ pid_with_resistance = PIDControllerWithResistance(Kp=1.0, set_point=50, resistan
 # Initial conditions
 speed = 0
 throttle_with_resistance = []
-speed_recorded_with_resistance = []
+speed_record_with_resistance = []
 
 # Simulate the system with resistance
 for t in time:
     control = pid_with_resistance.update(speed, dt)
     speed += control * dt  # Speed is affected by throttle control and resistance
     throttle_with_resistance.append(control)
-    speed_recorded_with_resistance.append(speed)
+    speed_record_with_resistance.append(speed)
 
 # Plot setup
 fig, ax = plt.subplots()
 plt.subplots_adjust(left=0.1, bottom=0.3)
 
-l, = plt.plot(time, speed_recorded_with_resistance, label="Speed Output (With Resistance)")
+l, = plt.plot(time, speed_record_with_resistance, label="Speed Output (With Resistance)")
 plt.axhline(pid_with_resistance.set_point, color='r', linestyle='--', label='Set Point')
 plt.xlabel('Time [s]')
 plt.ylabel('Speed [m/s]')
